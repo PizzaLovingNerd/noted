@@ -205,13 +205,13 @@ const App = () => {
   const showBottomNav = true;
 
   return (
-    <div className="min-h-screen bg-black flex justify-center items-center font-sans">
-      {/* Mobile Container */}
-      <div className="w-full max-w-md h-[100dvh] bg-[#DCEFFB] relative overflow-hidden shadow-2xl sm:rounded-3xl sm:h-[850px] flex flex-col">
+    <div className="min-h-screen min-h-[100dvh] bg-[#DCEFFB] flex justify-center items-center font-sans sm:bg-black">
+      {/* Mobile Container: full-bleed on phone, card on larger screens */}
+      <div className="w-full max-w-md h-[100dvh] max-h-[100dvh] bg-[#DCEFFB] relative overflow-hidden shadow-2xl sm:rounded-3xl sm:h-[850px] flex flex-col">
         
         {/* Top Header */}
         {(currentScreen === 'home' || currentScreen === 'search') && (
-          <header className="px-5 pt-8 pb-2 flex justify-between items-center z-10 relative">
+          <header className="px-5 pt-8 pb-2 flex justify-between items-center z-10 relative pt-[max(2rem,env(safe-area-inset-top))]">
             <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Noted" className="h-10 w-auto cursor-pointer object-contain" onClick={handleHomeClick} />
             <div 
                 className="flex items-center gap-2 cursor-pointer hover:opacity-70 transition-opacity"
@@ -261,7 +261,7 @@ const App = () => {
 
         {/* Bottom Navigation */}
         {showBottomNav && (
-          <nav className="absolute bottom-0 left-0 right-0 h-20 bg-white border-t border-gray-100 flex items-center justify-between px-10 z-20">
+          <nav className="absolute bottom-0 left-0 right-0 min-h-[5rem] pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] bg-white border-t border-gray-100 flex items-center justify-between px-10 z-20">
              <button onClick={handleHomeClick} className="p-2 flex flex-col items-center gap-1 group">
                <HomeIcon className={`w-7 h-7 ${currentScreen === 'home' ? 'text-black stroke-[2.5px]' : 'text-gray-400 group-hover:text-black'}`} />
              </button>
