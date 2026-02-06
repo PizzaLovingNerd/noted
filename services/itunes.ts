@@ -117,11 +117,22 @@ export const fetchSpecificAlbums = async (queries: (string | SearchQuery)[]): Pr
   return results.filter((album): album is Album => album !== null);
 };
 
-// Hardcoded artwork for trending albums (local images in project)
+// Base URL for static assets (required for GitHub Pages when base is e.g. '/noted/')
+const ASSET_BASE = import.meta.env.BASE_URL;
+
+const asset = (filename: string) => `${ASSET_BASE}${filename.replace(/^\//, '')}`;
+
+// Hardcoded artwork for trending albums (local images in public/)
 const TRENDING_ARTWORK = {
-  dontBeDumb: "/A$AP_Rocky_-_Don't_Be_Dumb.png",
-  octane: "/Don_Toliver_-_Octane_cover.png",
-  xavier: "/Xavier_album_cover.jpg",
+  dontBeDumb: asset("A$AP_Rocky_-_Don't_Be_Dumb.png"),
+  octane: asset("Don_Toliver_-_Octane_cover.png"),
+  xavier: asset("Xavier_album_cover.jpg"),
+} as const;
+
+// Hardcoded artwork for Best of 2025 (local images in public/)
+const TOP_YEAR_ARTWORK = {
+  gettingKilled: asset("Geese_-_Getting_Killed.jpg"),
+  revengeseekerz: asset("Jane_remover_revengeseekerz.jpg"),
 } as const;
 
 export const fetchTrendingAlbums = async (): Promise<Album[]> => {
@@ -167,13 +178,13 @@ export const fetchTopYearAlbums = async (): Promise<Album[]> => {
         forcedGenre: "Hip-Hop/Rap"
     },
     { 
-        // Use Projector album art for Geese
         query: "Getting Killed Geese", 
         fallback: "3D Country Geese",
         forcedTitle: "Getting Killed", 
         forcedArtist: "Geese",
         forcedDate: "2025-03-10",
-        forcedGenre: "Alternative/Rock"
+        forcedGenre: "Alternative/Rock",
+        forcedArtwork: TOP_YEAR_ARTWORK.gettingKilled
     },
     { 
         query: "Revengeseekerz Jane Remover", 
@@ -181,7 +192,8 @@ export const fetchTopYearAlbums = async (): Promise<Album[]> => {
         forcedTitle: "Revengeseekerz",
         forcedArtist: "Jane Remover",
         forcedDate: "2025-04-12",
-        forcedGenre: "Shoegaze"
+        forcedGenre: "Shoegaze",
+        forcedArtwork: TOP_YEAR_ARTWORK.revengeseekerz
     }
   ]);
 };
