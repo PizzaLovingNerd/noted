@@ -124,9 +124,9 @@ const asset = (filename: string) => `${ASSET_BASE}${filename.replace(/^\//, '')}
 
 // Hardcoded artwork for trending albums (local images in public/)
 const TRENDING_ARTWORK = {
-  dontBeDumb: asset("A$AP_Rocky_-_Don't_Be_Dumb.png"),
-  octane: asset("Don_Toliver_-_Octane_cover.png"),
-  xavier: asset("Xavier_album_cover.jpg"),
+  fallOff: asset("fall-off.jpg"),
+  Joji: asset("joji.jpg"),
+  Mayhem: asset("mayhem.jpg"),
 } as const;
 
 // Hardcoded artwork for Best of 2025 (local images in public/)
@@ -138,31 +138,31 @@ const TOP_YEAR_ARTWORK = {
 export const fetchTrendingAlbums = async (): Promise<Album[]> => {
   return fetchSpecificAlbums([
     { 
-        query: "Don't Be Dumb ASAP Rocky", 
-        fallback: "A$AP Rocky",
-        forcedTitle: "Don't Be Dumb",
-        forcedArtist: "A$AP Rocky",
-        forcedDate: "2025-02-20",
+        query: "The Fall-Off J. Cole", 
+        fallback: "J. Cole",
+        forcedTitle: "The Fall-Off",
+        forcedArtist: "J. Cole",
+        forcedDate: "2026-02-06",
         forcedGenre: "Hip-Hop/Rap",
-        forcedArtwork: TRENDING_ARTWORK.dontBeDumb
+        forcedArtwork: TRENDING_ARTWORK.fallOff
     },
     { 
-        query: "OCTANE Don Toliver", 
-        fallback: "Heaven or Hell Don Toliver",
-        forcedTitle: "OCTANE",
-        forcedArtist: "Don Toliver",
-        forcedDate: "2025-02-18",
-        forcedGenre: "Hip-Hop/Rap",
-        forcedArtwork: TRENDING_ARTWORK.octane
+        query: "Piss In The Wind Joji", 
+        fallback: "Joji",
+        forcedTitle: "Piss In The Wind",
+        forcedArtist: "Joji",
+        forcedDate: "2026-02-06",
+        forcedGenre: "Pop",
+        forcedArtwork: TRENDING_ARTWORK.Joji
     }, 
     { 
-        query: "Xavier xaviersobased", 
-        fallback: "Xavier wulf",
-        forcedTitle: "Xavier",
-        forcedArtist: "xaviersobased",
-        forcedDate: "2025-01-15",
+        query: "Liturgy of Death Mayhem", 
+        fallback: "Mayhem",
+        forcedTitle: "Liturgy of Death",
+        forcedArtist: "Mayhem",
+        forcedDate: "2026-02-06",
         forcedGenre: "Hip-Hop/Rap",
-        forcedArtwork: TRENDING_ARTWORK.xavier
+        forcedArtwork: TRENDING_ARTWORK.Mayhem
     }
   ]);
 };
